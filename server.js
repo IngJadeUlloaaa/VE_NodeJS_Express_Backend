@@ -10,9 +10,8 @@ const app = express();
 app.use(bodyParser.json());
 
 // Rutas
-app.use('/api/auth/users', userRoutes);
-
-app.use('/api', classesRoutes);
+app.use('/api/auth/users', userRoutes);   // Ruta para autenticación de usuarios
+app.use('/api', classesRoutes);           // Ruta para clases
 
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);

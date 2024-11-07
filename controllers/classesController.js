@@ -2,10 +2,11 @@
 import { getClassesByUserCode } from '../models/classesModel.js';
 
 export const getClasses = (req, res) => {
-  const { code } = req.params;
+  const userCode = req.user.code; // Extrae el 'code' del token
 
-  getClassesByUserCode(code, (err, classes) => {
+  getClassesByUserCode(userCode, (err, classes) => {
     if (err) {
+      console.error("Database error:", err);
       return res.status(500).json({ message: 'Error retrieving classes.' });
     }
     if (classes.length === 0) {
