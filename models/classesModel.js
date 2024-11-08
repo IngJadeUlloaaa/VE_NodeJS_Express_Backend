@@ -1,6 +1,5 @@
 // models/classesModel.js
 import db from '../database/db.js';
-import { getClasses } from '../controllers/classesController.js';
 
 export const getClassesByUserCode = (userCode, callback) => {
   const query = `

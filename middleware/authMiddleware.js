@@ -2,6 +2,7 @@
 import jwt from 'jsonwebtoken';
 import { ACCESS_TOKEN_SECRET } from '../config.js';
 
+
 export const authenticateToken = (req, res, next) => {
   // Obtiene el token del encabezado de autorización
   const authHeader = req.headers['authorization'];
