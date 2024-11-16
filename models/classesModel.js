@@ -6,18 +6,18 @@ export const getClassesByUserCode = (userCode, callback) => {
     SELECT 
       Classes.codeClasses, 
       Classes.classesName, 
-      Classes.gradeClasses, 
-      Classes.noteClasses 
+      Classes.gradeClasses,
+      StudentClasses.note
     FROM 
-      Classes
+        Users
     INNER JOIN 
-      StudentClasses ON Classes.idClasses = StudentClasses.idClasses
+        Students ON Users.idStudents = Students.idStudents
     INNER JOIN 
-      Students ON StudentClasses.idStudents = Students.idStudents
+        StudentClasses ON Students.idStudents = StudentClasses.idStudents
     INNER JOIN 
-      Users ON Students.idStudents = Users.idStudents
+        Classes ON StudentClasses.idClasses = Classes.idClasses
     WHERE 
-      Users.code = ?;
+        Users.code = 211370;
   `;
 
   db.all(query, [userCode], (err, rows) => {
