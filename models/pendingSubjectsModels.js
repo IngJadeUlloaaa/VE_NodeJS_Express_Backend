@@ -4,21 +4,21 @@ import db from "../database/db.js";
 export const getPendingSubjectsByCode = (userCode, callback) => {
     const query = `
         SELECT 
-            Classes.codeClasses, 
-            Classes.classesName, 
-            Classes.gradeClasses 
-        FROM 
-            Classes
+            Classes.codeClasses,
+            Classes.classesName,
+            Classes.gradeClasses,
+            Classes.offered
+        FROM Users
+        INNER JOIN
+            Students ON Users.idStudents = Students.idStudents
+        INNER JOIN
+            StudentClasses ON Students.idStudents = StudentClasses.idStudents
         INNER JOIN 
-            StudentClasses ON Classes.idClasses = StudentClasses.idClasses
-        INNER JOIN 
-            Students ON StudentClasses.idStudents = Students.idStudents
-        INNER JOIN 
-            Users ON Students.idStudents = Users.idStudents
+            Classes ON StudentClasses.idClasses = Classes.idClasses
         WHERE 
             Users.code = ?
         ORDER BY 
-            Classes.idClasses DESC 
+            StudentClasses.idStudentClasses DESC
         LIMIT 5;
     `;
 
