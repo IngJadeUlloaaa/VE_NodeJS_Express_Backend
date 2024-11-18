@@ -17,7 +17,7 @@ export const getClassesByUserCode = (userCode, callback) => {
     INNER JOIN 
         Classes ON StudentClasses.idClasses = Classes.idClasses
     WHERE 
-        Users.code = 211370;
+        Users.code = ?;
   `;
 
   db.all(query, [userCode], (err, rows) => {

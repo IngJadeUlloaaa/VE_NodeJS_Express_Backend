@@ -207,13 +207,14 @@ db.serialize(() => {
     db.run(`INSERT INTO Classes (codeClasses, classesName, gradeClasses, idCareer, offered) VALUES (?, ?, ?, ?, ?)`, clas);
   });
 
+  
   // remove duplicate classes
   db.run(`
     DELETE FROM Classes
     WHERE idClasses NOT IN (
       SELECT MIN(idClasses)
       FROM Classes
-      GROUP BY codeClasses, classesName, noteClasses, offered, idCareer
+      GROUP BY codeClasses, classesName, gradeClasses, idCareer, offered
     );
   `);
 
