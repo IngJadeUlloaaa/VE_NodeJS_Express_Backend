@@ -44,6 +44,7 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS Details (
       idDetails INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
       classDay VARCHAR(100) NOT NULL,
+      classGroup VARCHAR(100) NOT NULL,
       timeClass VARCHAR(100) NOT NULL,
       classroomClass VARCHAR(100) NOT NULL,
       classroom VARCHAR(100) NOT NULL
@@ -52,78 +53,78 @@ db.serialize(() => {
 
   // Insert datas from details
   const details = [
-    ['Thursday', '08:30 am', 'A02', 'sd8kjdf'],
-    ['Thursday', '10:00 am', 'A15', 'asdf3l0'],
-    ['Thursday', '11:40 am', 'A06', 'vxc4fdf'],
-    ['Thursday', '01:15 pm', 'A30', 'svf5h5h'],
-    ['Thursday', '03:00 pm', 'L02', 'kl9jkkm'],
-    ['Thursday', '08:30 am', 'A04', 'ioruwe9'],
-    ['Thursday', '10:00 am', 'L02', 'poinf43'],
-    ['Thursday', '11:40 am', 'A06', 'vcxz3sz'],
-    ['Thursday', '01:15 pm', 'A14', 'pll0kf3'],
-    ['Thursday', '03:00 pm', 'L04', 'opoñ34r'],
-    ['Thursday', '08:30 am', 'A08', 'sdf3ftt'],
-    ['Thursday', '10:00 am', 'A03', 'ijfkjsf'],
-    ['Thursday', '11:40 am', 'A12', 'ksja2kf'],
-    ['Thursday', '01:15 pm', 'A16', 'bneuqp0'],
-    ['Thursday', '03:00 pm', 'L05', '0kd8mne'],
-    ['Tuesday', '08:30 am', 'A16', 'asfd3f3'],
-    ['Tuesday', '10:15 am', 'L04', 'jjkh32f'],
-    ['Thursday', '08:30 am', 'A02', 'sxnvc33'],
-    ['Thursday', '10:15 am', 'A02', 'ksd22kl'],
-    ['Friday', '08:30 am', 'A04', 'lsdqq1d'],
-    ['Tuesday', '08:30 am', 'L02', 'njj2j3j'],
-    ['Tuesday', '10:15 am', 'L04', 'buh3y1u'],
-    ['Thursday', '08:30 am', 'L05', 'df9sd9'],
-    ['Thursday', '10:15 am', 'A06', 'v8sa8sv'],
-    ['Friday', '08:30 am', 'L03', 'qwert2f'],
-    ['Tuesday', '08:30 am', 'L04', 'nv3jd9'],
-    ['Tuesday', '10:15 am', 'L05', 'm3mm30'],
-    ['Thursday', '08:30 am', 'L03', 'vd4t5r2'],
-    ['Thursday', '10:15 am', 'L04', 'qaxs2ds'],
-    ['Friday', '08:30 am', 'A30', 'opjc3nij'],
-    ['Tuesday', '08:30 am', 'L04', 'rfoir4'],
-    ['Tuesday', '10:15 am', 'L05', 'dfsgm4'],
-    ['Thursday', '08:30 am', 'L03', 'safsam3'],
-    ['Thursday', '10:15 am', 'L04', 'saadee3'],
-    ['Friday', '08:30 am', 'L04', 'asacc3'],
-    ['Tuesday', '08:30 am', 'L06', 'fsdv4f'],
-    ['Tuesday', '10:15 am', 'L05', 'vfem2k2'],
-    ['Thursday', '08:30 am', 'L02', 'sdclm22'],
-    ['Thursday', '10:15 am', 'L04', 'sdmklm3'],
-    ['Friday', '08:30 am', 'L03', 'qwerf33'],
-    ['Tuesday', '08:30 am', 'A06', 'jsnc3km'],
-    ['Tuesday', '10:15 am', 'L05', 'qewer3e'],
-    ['Thursday', '08:30 am', 'A14', 'vsdvdv4'],
-    ['Thursday', '10:15 am', 'L06', 'kmsmd9'],
-    ['Friday', '08:30 am', 'L04', 'sdo3okd'],
-    ['Sunday', '08:30 am', 'L11', 'sakkd9m'],
-    ['Sunday', '10:00 am', 'L06', 'sansdn3'],
-    ['Sunday', '11:40 am', 'A45', 'sdakfj3'],
-    ['Sunday', '01:15 pm', 'L14', 'sado22k'],
-    ['Sunday', '03:00 pm', 'L05', 'ascmne2'],
-    ['Sunday', '08:30 am', 'A04', 'sdfasd3'],
-    ['Sunday', '10:00 am', 'A18', 'vsdve3d'],
-    ['Sunday', '11:40 am', 'A40', 'sdf7sdm'],
-    ['Sunday', '01:15 pm', 'A40', 'jsdn5hb'],
-    ['Sunday', '03:00 pm', 'L05', 'oai9kds'],
-    ['Sunday', '08:30 am', 'A16', 'sdfasd3'],
-    ['Sunday', '10:00 am', 'A06', 'vsdve3d'],
-    ['Sunday', '11:40 am', 'L11', 'sdf7sdm'],
-    ['Sunday', '01:15 pm', 'L02', 'jsdn5hb'],
-    ['Sunday', '03:00 pm', 'A16', 'oai9kds']
+    ['Thursday', 'MI01C', '08:30 am', 'A02', 'sd8kjdf'],
+    ['Thursday', 'MI01C', '10:00 am', 'A15', 'asdf3l0'],
+    ['Thursday', 'MI01C', '11:40 am', 'A06', 'vxc4fdf'],
+    ['Thursday', 'MI01C', '01:15 pm', 'A30', 'svf5h5h'],
+    ['Thursday', 'MI01C', '03:00 pm', 'L02', 'kl9jkkm'],
+    ['Thursday', 'MI02B', '08:30 am', 'A04', 'ioruwe9'],
+    ['Thursday', 'MI02B', '10:00 am', 'L02', 'poinf43'],
+    ['Thursday', 'MI02B', '11:40 am', 'A06', 'vcxz3sz'],
+    ['Thursday', 'MI02B', '01:15 pm', 'A14', 'pll0kf3'],
+    ['Thursday', 'MI02B', '03:00 pm', 'L04', 'opoñ34r'],
+    ['Thursday', 'MI03C', '08:30 am', 'A08', 'sdf3ftt'],
+    ['Thursday', 'MI03C', '10:00 am', 'A03', 'ijfkjsf'],
+    ['Thursday', 'MI03C', '11:40 am', 'A12', 'ksja2kf'],
+    ['Thursday', 'MI03C', '01:15 pm', 'A16', 'bneuqp0'],
+    ['Thursday', 'MI03C', '03:00 pm', 'L05', '0kd8mne'],
+    ['Tuesday', 'MI04B', '08:30 am', 'A16', 'asfd3f3'],
+    ['Tuesday', 'MI04B', '10:15 am', 'L04', 'jjkh32f'],
+    ['Thursday', 'MI04B', '08:30 am', 'A02', 'sxnvc33'],
+    ['Thursday', 'MI04B', '10:15 am', 'A02', 'ksd22kl'],
+    ['Friday', 'MI04B', '08:30 am', 'A04', 'lsdqq1d'],
+    ['Tuesday', 'MI05C', '08:30 am', 'L02', 'njj2j3j'],
+    ['Tuesday', 'MI05C', '10:15 am', 'L04', 'buh3y1u'],
+    ['Thursday', 'MI05C', '08:30 am', 'L05', 'df9sd9'],
+    ['Thursday', 'MI05C', '10:15 am', 'A06', 'v8sa8sv'],
+    ['Friday', 'MI05C', '08:30 am', 'L03', 'qwert2f'],
+    ['Tuesday', 'MI06D', '08:30 am', 'L04', 'nv3jd9'],
+    ['Tuesday', 'MI06D', '10:15 am', 'L05', 'm3mm30'],
+    ['Thursday', 'MI06D', '08:30 am', 'L03', 'vd4t5r2'],
+    ['Thursday', 'MI06D', '10:15 am', 'L04', 'qaxs2ds'],
+    ['Friday', 'MI06D', '08:30 am', 'A30', 'opjc3nij'],
+    ['Tuesday', 'MI07B', '08:30 am', 'L04', 'rfoir4'],
+    ['Tuesday', 'MI07B', '10:15 am', 'L05', 'dfsgm4'],
+    ['Thursday', 'MI07B', '08:30 am', 'L03', 'safsam3'],
+    ['Thursday', 'MI07B', '10:15 am', 'L04', 'saadee3'],
+    ['Friday', 'MI07B', '08:30 am', 'L04', 'asacc3'],
+    ['Tuesday', 'MI08D', '08:30 am', 'L06', 'fsdv4f'],
+    ['Tuesday', 'MI08D', '10:15 am', 'L05', 'vfem2k2'],
+    ['Thursday', 'MI08D', '08:30 am', 'L02', 'sdclm22'],
+    ['Thursday', 'MI08D', '10:15 am', 'L04', 'sdmklm3'],
+    ['Friday', 'MI08D', '08:30 am', 'L03', 'qwerf33'],
+    ['Tuesday', 'MI09C', '08:30 am', 'A06', 'jsnc3km'],
+    ['Tuesday', 'MI09C', '10:15 am', 'L05', 'qewer3e'],
+    ['Thursday', 'MI09C', '08:30 am', 'A14', 'vsdvdv4'],
+    ['Thursday', 'MI09C', '10:15 am', 'L06', 'kmsmd9'],
+    ['Friday', 'MI09C', '08:30 am', 'L04', 'sdo3okd'],
+    ['Sunday', 'MI10B', '08:30 am', 'L11', 'sakkd9m'],
+    ['Sunday', 'MI10B', '10:00 am', 'L06', 'sansdn3'],
+    ['Sunday', 'MI10B', '11:40 am', 'A45', 'sdakfj3'],
+    ['Sunday', 'MI10B', '01:15 pm', 'L14', 'sado22k'],
+    ['Sunday', 'MI10B', '03:00 pm', 'L05', 'ascmne2'],
+    ['Sunday', 'MI11B', '08:30 am', 'A04', 'sdfasd3'],
+    ['Sunday', 'MI11B', '10:00 am', 'A18', 'vsdve3d'],
+    ['Sunday', 'MI11B', '11:40 am', 'A40', 'sdf7sdm'],
+    ['Sunday', 'MI11B', '01:15 pm', 'A40', 'jsdn5hb'],
+    ['Sunday', 'MI11B', '03:00 pm', 'L05', 'oai9kds'],
+    ['Sunday', 'MI12D', '08:30 am', 'A16', 'sdfasd3'],
+    ['Sunday', 'MI12D', '10:00 am', 'A06', 'vsdve3d'],
+    ['Sunday', 'MI12D', '11:40 am', 'L11', 'sdf7sdm'],
+    ['Sunday', 'MI12D', '01:15 pm', 'L02', 'jsdn5hb'],
+    ['Sunday', 'MI12D', '03:00 pm', 'A16', 'oai9kds']
   ];
   details.forEach(detail => {
-    db.run(`INSERT INTO Details (classDay, timeClass, classroomClass, classroom) VALUES (?, ?, ?, ?)`, detail);
+    db.run(`INSERT INTO Details (classDay, classGroup, timeClass, classroomClass, classroom) VALUES (?, ?, ?, ?, ?)`, detail);
   });
 
-  // delete duplicate detail
+  // delete duplicate details
   db.run(`
     DELETE FROM Details
     WHERE idDetails NOT IN (
       SELECT MIN(idDetails)
       FROM Details
-      GROUP BY classDay, timeClass, classroomClass, classroom
+      GROUP BY classDay, classGroup, timeClass, classroomClass, classroom
     );
   `);
 
@@ -134,7 +135,7 @@ db.serialize(() => {
       codeClasses VARCHAR(100) NOT NULL,
       classesName VARCHAR(100) NOT NULL,
       gradeClasses VARCHAR(100) NOT NULL,
-      idCareer INTEGER,
+      idCareer INTEGER NOT NULL,
       offered VARCHAR(100) NOT NULL,
       FOREIGN KEY (idCareer) REFERENCES Career (idCareer) ON DELETE CASCADE
     );
@@ -226,7 +227,7 @@ db.serialize(() => {
       idClasses INTEGER,
       note VARCHAR(1),
       enrollmentDate TEXT,
-      FOREIGN KEY (idClasses) REFERENCES Classess (idClassess),
+      FOREIGN KEY (idClasses) REFERENCES Classess (idClasses),
       FOREIGN KEY (idStudents) REFERENCES Students (idStudents)
     );
   `);
@@ -483,7 +484,7 @@ db.serialize(() => {
     WHERE idStudentClasses NOT IN (
       SELECT MIN(idStudentClasses)
       FROM StudentClasses
-      GROUP BY idStudents, idClasses, enrollmentDate
+      GROUP BY idStudents, idClasses, note, enrollmentDate
     );
   `);
 

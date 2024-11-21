@@ -15,4 +15,3 @@ export const getPendingSubjects = (req, res) => {
         res.status(200).json(pendingSubjects);
     });
 };
-
