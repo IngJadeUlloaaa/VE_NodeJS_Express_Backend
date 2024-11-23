@@ -1,4 +1,4 @@
-// controllers/userController.js
+import bcrypt from 'bcrypt';
 import { generateTokens } from '../models/userModel.js';
 import db from '../database/db.js';
 
@@ -8,18 +8,26 @@ export const login = (req, res) => {
 
   // Busca el usuario en la base de datos
   const query = `SELECT * FROM Users WHERE code = ?`;
-  db.get(query, [code], (err, user) => {
+  db.get(query, [code], async (err, user) => {
     if (err) {
+      console.error('Database error:', err);
       return res.status(500).json({ message: 'Error retrieving user.' });
     }
-    if (!user || user.passwd !== passwd) {  // En una aplicación real, utiliza bcrypt para comparar
+  
+    if (!user) {
+      console.error('User not found for code:', code);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-
-    // Genera los tokens
+  
+    console.log('Retrieved user:', user);
+  
+    const match = await bcrypt.compare(passwd, user.passwd);
+    if (!match) {
+      console.error('Password does not match');
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+  
     const tokens = generateTokens(user);
-
-    // Envía los tokens al cliente
     res.status(200).json(tokens);
-  });
+  });  
 };

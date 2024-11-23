@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes.js';
 import classesRoutes from './routes/classesRoutes.js';
 import pendingSubjectsRoutes from './routes/pendingSubjectsRoutes.js';
 import subjectReportCardRoutes from './routes/subjectReportCardRoutes.js';
+import profileRoutes from './routes/profileRoutes.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,7 +15,8 @@ app.use(bodyParser.json());
 app.use('/api/auth/users', userRoutes); 
 app.use('/api', classesRoutes);            
 app.use('/api', pendingSubjectsRoutes);
-app.use('/api', subjectReportCardRoutes);  
+app.use('/api', subjectReportCardRoutes);
+app.use('/api', profileRoutes);
 
 app.listen(PORT, HOST, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);

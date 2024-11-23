@@ -1,6 +1,7 @@
 // database/db.js
 import sqlite3 from 'sqlite3';
 import path from 'path';
+import bcrypt from 'bcrypt';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -328,7 +329,7 @@ db.serialize(() => {
     [2, 33, 'A'],
     [2, 34, 'A'],
     [2, 35, 'A'],
-    [2, 35, ''], // here
+    [2, 36, ''], // here
     [2, 37, 'A'],
     [2, 38, 'A'],
     [2, 39, 'A'],
@@ -533,14 +534,16 @@ db.serialize(() => {
     );
   `);
 
+  const saltRounds = 10;
   const users = [
     [211572, '12345', 1], // me
     [211370, '12345', 2], // garcia
     [211621, '12345', 3], // luis
     [211372, '12345', 4] // josue
   ];
-  users.forEach(user => {
-    db.run(`INSERT INTO Users(code, passwd, idStudents) VALUES (?, ?, ?)`, user);
+  users.forEach(async user => {
+    const hashedPassword = await bcrypt.hash(user[1], saltRounds);
+    db.run(`INSERT INTO Users(code, passwd, idStudents) VALUES (?, ?, ?)`, [user[0], hashedPassword, user[2]]);
   });
 
   // remove duplicate users
@@ -627,10 +630,10 @@ db.serialize(() => {
     [60, 60]
   ];
   classesDetails.forEach(classesDetail => {
-    db.run(`INSERT INTO ClassesDetails (idClasses, idDetails)  VALUES (?, ?)`, classesDetail);
+    db.run(`INSERT INTO ClassesDetails (idClasses, idDetails) VALUES (?, ?)`, classesDetail);
   });
 
-  // remove duplicate users
+  // remove duplicate 
   db.run(`
     DELETE FROM ClassesDetails
     WHERE idClassesDetails NOT IN (

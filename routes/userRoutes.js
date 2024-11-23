@@ -4,6 +4,6 @@ import { login } from '../controllers/userController.js';
 
 const router = express.Router();
 
-router.post('/login', login);  // Ruta para login
+router.post('/login', login);
 
 export default router;
